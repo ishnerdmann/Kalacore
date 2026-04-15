@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalacore | Digital Art Studio</title>
+    <meta name="description"
+        content="Kalacore helps brands turn complex ideas into simple, scalable digital experiences. Premium design studio.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@300;400;500;700&family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1.1">
+    <!-- Libs -->
+    <!-- Libs (Using reliable CDNs to avoid local 404 issues) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.162.0/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.43/bundled/lenis.min.js"></script>
+</head>
+
+<body>
+
+    <!-- ────────── PRELOADER ────────── -->
+    <div class="preloader" id="preloader">
+        <div class="grain-overlay" style="opacity: 0.15; z-index: 1;"></div>
+        <canvas id="preloaderCanvas" class="preloader-canvas"></canvas>
+        <div class="preloader-interactive" id="preloaderInteractive">
+            <img src="logo.svg" alt="Kalacore" class="preloader-logo-big" id="preloaderBrand">
+
+            <div class="preloader-slider-wrapper">
+                <span class="slider-text" id="preloaderCounter">0%</span>
+                <div class="preloader-bar-wrap">
+                    <div class="preloader-bar-fill" id="preloaderBar"></div>
+                </div>
+                <span class="slider-text" style="opacity: 0.4;">100%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-drop" id="cursorDrop"></div>
+
+    <!-- ────────── NAVBAR ────────── -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo" aria-label="Kalacore Home">
+            <img src="logo.svg" alt="Kalacore Logo" class="logo-svg">
+        </a>
+
+        <!-- New: Ticker and Time Display -->
+        <div class="nav-status-bar">
+            <div class="nav-ticker-pill">
+                <div class="ticker-content-wrapper">
+                    <span class="ticker-text">Admission Open • Register Now • Affiliated with Skill India <img
+                            src="skill_india.svg" class="ticker-logo"> & NSDPI <img src="logo-nsdpi.png"
+                            class="ticker-logo"> • Admission Open • Register Now • Affiliated with Skill India <img
+                            src="skill_india.svg" class="ticker-logo"> & NSDPI <img src="logo-nsdpi.png"
+                            class="ticker-logo"> • Admission Open • Register Now • Affiliated with Skill India <img
+                            src="skill_india.svg" class="ticker-logo"> & NSDPI <img src="logo-nsdpi.png"
+                            class="ticker-logo"></span>
+                </div>
+            </div>
+            <div class="nav-time-pill">
+                <span id="localTime">12:00 PM</span>
+                <svg class="clock-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experimental">Education</a></li>
+            <li><a href="#real-talk">Student Talk</a></li>
+            <li><a href="#enroll" class="nav-cta">Enroll ↗</a></li>
+        </ul>
+        <button class="nav-menu-toggle" aria-label="Menu">
+            <span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- ────────── HERO ────────── -->
+    <section id="hero" class="hero-section">
+
+        <!-- Grain overlay -->
+        <div class="grain-overlay"></div>
+
+        <!-- Left floating illustration -->
+        <div class="hero-illus hero-illus--left" id="illusLeft">
+            <img src="assets/char-left.svg" alt="Character giving thumbs up">
+        </div>
+
+        <!-- Right floating illustration -->
+        <div class="hero-illus hero-illus--right" id="illusRight">
+            <img src="assets/char-right.svg" alt="Character thinking and working">
+        </div>
+
+        <!-- Center content -->
+        <div class="hero-center">
+
+            <!-- Top center video card (Andreas style) -->
+            <div class="video-card" id="videoCard">
+                <div class="video-container">
+                    <video id="heroVideo" autoplay loop muted playsinline aria-label="Hero Showcase Video"
+                        class="hero-video-el">
+                        <source src="ttt .mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- Button moved outside container to prevent clipping -->
+                <button class="play-pause-btn" id="videoToggle" aria-label="Play or Pause Video">
+                    <svg class="play-icon" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <svg class="pause-icon hidden" viewBox="0 0 24 24">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Small Greeting -->
+            <p class="hero-eyebrow">Hi, we are <strong>Kalacore Creation</strong></p>
+
+            <!-- Main Headline (Unified for Typewriter) -->
+            <h1 class="hero-headline" id="typewriterHeadline">
+                Kalacore Creation is a <span class="handwritten">Rooted Learning Studio</span> <br>
+                for <span class="handwritten">creative growth.</span>
+            </h1>
+
+            <!-- Subtext -->
+            <p class="hero-subtext">
+                Rooted learning is about building creativity on strong foundations.<br>
+                It values patience, practice, and time-tested ways of learning, where growth is gradual and
+                meaningful.<br>
+                Here, creativity is not rushed or forced, but shaped through discipline, guidance, and care.
+            </p>
+
+            <!-- CTA -->
+            <div class="hero-cta-wrap">
+                <a href="#enroll" class="btn-pill" id="ctaBtn">
+                    Join the Studio
+                    <span class="btn-arrow">→</span>
+                </a>
+                <a href="#real-talk" class="btn-ghost">Student Talks</a>
+            </div>
+
+            <!-- Floating tags -->
+            <div class="hero-tags">
+                <span class="tag">🎨 Art Education</span>
+                <span class="tag">📔 Studio Practice</span>
+                <span class="tag">🎓 Diploma Programs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────── SHOWCASE & TESTIMONIALS ────────── -->
+    <section class="showcase-section">
+        <div class="image-strip">
+            <!-- Original items -->
+            <div class="showcase-card"><img src="khat.jpg.jpeg" alt="Work 2"></div>
+            <div class="showcase-card"><img src="3.jpg" alt="Work 3"></div>
+            <div class="showcase-card"><img src="13.jpeg" alt="Work 13"></div>
+            <div class="showcase-card"><img src="15.jpg" alt="Work 15"></div>
+            <div class="showcase-card"><img src="16.jpg.jpeg" alt="Work 16"></div>
+            <!-- Duplicates for loop -->
+            <div class="showcase-card"><img src="khat.jpg.jpeg" alt="Work 2"></div>
+            <div class="showcase-card"><img src="3.jpg" alt="Work 3"></div>
+            <div class="showcase-card"><img src="13.jpeg" alt="Work 13"></div>
+            <div class="showcase-card"><img src="15.jpg" alt="Work 15"></div>
+            <div class="showcase-card"><img src="16.jpg.jpeg" alt="Work 16"></div>
+        </div>
+
+        <div class="testimonial-strip">
+            <!-- Original Set -->
+            <div class="testimonial-card">
+                <div class="testi-header">
+                    <img src="dipanshu.jpeg" alt="Dipanshu" class="testi-avatar">
+                    <div class="testi-meta"><span class="testi-name">Dipanshu</span><span class="testi-title">Student
+                            (Fine Arts)</span></div>
+                </div>
+                <p class="testi-quote">"Being a student at Kalacore Creations has been an amazing experience. The
+                    institute not only teaches art and fashion designing but also helps students become independent and
+                    confident. The support, guidance, and exposure we receive here are truly valuable."</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testi-header">
+                    <img src="khushi.jpeg" alt="Student 3" class="testi-avatar">
+                    <div class="testi-meta"><span class="testi-name">Khushi Titoria</span><span class="testi-title">Fine
+                            Arts Student</span></div>
+                </div>
+                <p class="testi-quote">"I feel lucky to be a part of Kalacore Creations. The faculty is very supportive
+                    and always encourages us to think creatively. The practical approach and hands-on learning made it
+                    easy for me to understand concepts and grow as an artist."</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testi-header">
+                    <img src="mukesh kumar.jpg.jpeg" alt="Parent" class="testi-avatar">
+                    <div class="testi-meta"><span class="testi-name">Mr. Mukesh kumar</span><span
+                            class="testi-title">Father of Payal (Fashion Design Student)</span></div>
+                </div>
+                <p class="testi-quote">"As a parent, I feel my child is extremely lucky to be a part of Kalacore
+                    Creations. The institute provides a safe, creative, and encouraging environment where students truly
+                    grow. I highly recommend it to every parent looking for quality art education."</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testi-header">
+                    <img src="gunjun.jpg.jpeg" alt="Gunjan" class="testi-avatar">
+                    <div class="testi-meta"><span class="testi-name">Gunjan</span><span class="testi-title">Student
+                            (Fine Arts)</span></div>
+                </div>
+                <p class="testi-quote">"Kalacore Creations is not just an institute, it is a place where creativity is
+                    respected and nurtured. The dedication of the mentors and the quality of training truly reflect
+                    their commitment towards building successful artists and designers."</p>
+            </div>
+            <!-- Duplicate Set for Seamless Loop -->
+            <div class="testimonial-card">
+                <div class="testi-header">
+                    <img src="dipanshu.jpeg" alt="Dipanshu" class="testi-avatar">
+                    <div class="testi-meta"><span class="testi-name">Dipanshu</span><span class="testi-title">Student
+                            (Fine Arts)</span></div>
+                </div>
+                <p class="testi-quote">"Being a student at Kalacore Creations has been an amazing experience. The
+                    institute not only teaches art and fashion designing but also helps students become independent and
+                    confident. The support, guidance, and exposure we receive here are truly valuable."</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testi-header">
+                    <img src="khushi.jpeg" alt="Student 3" class="testi-avatar">
+                    <div class="testi-meta"><span class="testi-name">Khushi Titoria</span><span class="testi-title">Fine
+                            Arts Student</span></div>
+                </div>
+                <p class="testi-quote">"I feel lucky to be a part of Kalacore Creations. The faculty is very supportive
+                    and always encourages us to think creatively. The practical approach and hands-on learning made it
+                    easy for me to understand concepts and grow as an artist."</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testi-header">
+                    <img src="mukesh kumar.jpg.jpeg" alt="Parent" class="testi-avatar">
+                    <div class="testi-meta"><span class="testi-name">Mr. Mukesh kumar</span><span
+                            class="testi-title">Father of Payal (Fashion Design Student)</span></div>
+                </div>
+                <p class="testi-quote">"As a parent, I feel my child is extremely lucky to be a part of Kalacore
+                    Creations. The institute provides a safe, creative, and encouraging environment where students truly
+                    grow. I highly recommend it to every parent looking for quality art education."</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testi-header">
+                    <img src="gunjun.jpg.jpeg" alt="Gunjan" class="testi-avatar">
+                    <div class="testi-meta"><span class="testi-name">Gunjan</span><span class="testi-title">Student
+                            (Fine Arts)</span></div>
+                </div>
+                <p class="testi-quote">"Kalacore Creations is not just an institute, it is a place where creativity is
+                    respected and nurtured. The dedication of the mentors and the quality of training truly reflect
+                    their commitment towards building successful artists and designers."</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ────────── STUDENT WORK GLIMPSE (OVERLAPPING CARDS) ────────── -->
+    <section id="glimpse" class="glimpse-section-stack">
+        <div class="container">
+            <header class="glimpse-intro-wrap">
+                <span class="glimpse-eyebrow">Student Showcase</span>
+                <h2 class="glimpse-heading">A glimpse of student work</h2>
+                <p class="glimpse-subtext">Building creative foundations through discipline, patience, and guided studio
+                    practice.</p>
+            </header>
+
+            <div class="glimpse-list">
+                <!-- Card 1 -->
+                <div class="glimpse-card">
+                    <div class="glimpse-visual-box color-blue">
+                        <div class="stack-wrapper">
+                            <div class="stack-item stack-main">
+                                <img src="khat.jpg.jpeg" alt="Oil Art Practice">
+                            </div>
+                            <div class="stack-item stack-sub color-green">
+                                <img src="13.jpeg" alt="Student Portrait">
+                            </div>
+                        </div>
+                        <div class="glimpse-meta">
+                            <h3 class="glimpse-title">Oil Art Practice</h3>
+                            <p class="glimpse-card-desc">Exploring light, shadow, and texture through classical oil
+                                painting on canvas.</p>
+                            <p class="glimpse-tags">brushwork, canvas, impasto technique</p>
+                        </div>
+                        <div class="student-bio">
+                            <p><strong>ABOUT:</strong> An aspiring artist from NIFT exploring the deep textures of oil
+                                on canvas. Her journey is defined by a commitment to classical techniques and a
+                                relentless search for raw, expressive human emotions through art.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glimpse-card">
+                    <div class="glimpse-visual-box color-peach">
+                        <div class="stack-wrapper">
+                            <div class="stack-item stack-main">
+                                <img src="3.jpg" alt="Charcoal Portrait Study">
+                            </div>
+                            <div class="stack-item stack-sub color-red">
+                                <img src="15.jpg" alt="Student Portrait">
+                            </div>
+                        </div>
+                        <div class="glimpse-meta">
+                            <h3 class="glimpse-title">Charcoal Portrait Study</h3>
+                            <p class="glimpse-card-desc">Guided exercises focused on anatomical precision and dramatic
+                                chiaroscuro.</p>
+                            <p class="glimpse-tags">fine art, shading, anatomical study</p>
+                        </div>
+                        <div class="student-bio">
+                            <p><strong>ABOUT:</strong> A dedicated student of fine arts specializing in classical
+                                portraiture. His practice is a continuous exploration of high-contrast light and shadow
+                                to master the complexities of human anatomy.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glimpse-card">
+                    <div class="glimpse-visual-box">
+                        <div class="stack-wrapper">
+                            <div class="stack-item stack-main">
+                                <img src="kalacore abstract 2.jpg.jpeg" alt="Kalacore Abstract Art">
+                            </div>
+                            <div class="stack-item stack-sub color-green">
+                                <img src="13.jpeg" alt="Student Portrait">
+                            </div>
+                        </div>
+                        <div class="glimpse-meta">
+                            <h3 class="glimpse-title">Acrylic Texture Study</h3>
+                            <p class="glimpse-card-desc">Building layers and exploring heavy-body paint applications on
+                                custom surfaces.</p>
+                            <p class="glimpse-tags">palette knife, layering, texture</p>
+                        </div>
+                        <div class="student-bio">
+                            <p><strong>ABOUT:</strong> Part of a collaborative student collective focus on contemporary
+                                acrylics. They explore the tactility of heavy-body paint, bringing abstract mental
+                                landscapes to life through 3D layering.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glimpse-card">
+                    <div class="glimpse-visual-box">
+                        <div class="stack-wrapper">
+                            <div class="stack-item stack-main">
+                                <img src="assets/charcoal_study.png" alt="Classical Still Life">
+                            </div>
+                            <div class="stack-item stack-sub color-red">
+                                <img src="16.jpg.jpeg" alt="Student Portrait">
+                            </div>
+                        </div>
+                        <div class="glimpse-meta">
+                            <h3 class="glimpse-title">Classical Still Life</h3>
+                            <p class="glimpse-card-desc">A traditional study of objects, light, and form using charcoal
+                                and graphite.</p>
+                            <p class="glimpse-tags">graphite, composition, light study</p>
+                        </div>
+                        <div class="student-bio">
+                            <p><strong>ABOUT:</strong> A classical realist with a keen eye for finding beauty in the
+                                everyday. Her journey focuses on mastering the fundamentals of observation, patience,
+                                and the delicate play of light.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────── THINGS WE HELP YOU MASTER ────────── -->
+    <section id="build" class="build-section">
+        <div class="container">
+            <header class="build-intro">
+                <h2 class="build-heading">THINGS WE HELP<br>YOU BUILD...</h2>
+                <p class="build-subtext">From foundational strokes to gallery-ready masterpieces, we guide you through a
+                    curated journey of artistic mastery. We simplify the complexities of visual storytelling, empowering
+                    you to translate bold visions onto canvas with technical precision and creative soul.</p>
+            </header>
+
+            <div class="build-cards-outer">
+                <div class="build-cards-row">
+                    <div class="build-mini-card" style="--i: 0"><img src="1.jpeg" alt="Art"></div>
+                    <div class="build-mini-card" style="--i: 1"><img src="2.jpg.jpeg" alt="Art"></div>
+                    <div class="build-mini-card" style="--i: 2"><img src="3.jpg.jpeg" alt="Art"></div>
+                    <div class="build-mini-card" style="--i: 3"><img src="4.HEIC.jpeg" alt="Art"></div>
+                    <div class="build-mini-card" style="--i: 4"><img
+                            src="ed trip/WhatsApp Image 2026-02-08 at 10.29.42 PM.jpeg" alt="Art"></div>
+                    <div class="build-mini-card" style="--i: 5"><img src="khat.jpg.jpeg" alt="Art"></div>
+                    <div class="build-mini-card" style="--i: 6"><img src="IMG_20260413_131017791 (1).jpg.jpeg"
+                            alt="Art"></div>
+                    <div class="build-mini-card" style="--i: 7"><img
+                            src="ed trip/WhatsApp Image 2025-12-07 at 11.45.53 AM.jpeg" alt="Art"></div>
+                    <div class="build-mini-card" style="--i: 8"><img src="16.jpg.jpeg" alt="Art"></div>
+                    <a href="#enroll" class="build-mini-card build-cta-card" style="--i: 9">
+                        <div class="cta-card-content">
+                            <span>LET'S<br>MAKE IT<br>HAPPEN</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="build-services">
+                <div class="service-col">
+                    <header class="service-header">
+                        <span class="service-icon">🖌️</span>
+                        <h3>Fine Art Mastery</h3>
+                    </header>
+                    <ul class="service-list">
+                        <li>Oil Painting Techniques</li>
+                        <li>Classical Realism</li>
+                        <li>Anatomy & Figure Study</li>
+                    </ul>
+                </div>
+                <div class="service-col">
+                    <header class="service-header">
+                        <span class="service-icon">🧵</span>
+                        <h3>Fashion Illustration</h3>
+                    </header>
+                    <ul class="service-list">
+                        <li>Creative Figure Sketching</li>
+                        <li>Garment Draping Study</li>
+                        <li>Fabric Texture Illustration</li>
+                    </ul>
+                </div>
+                <div class="service-col">
+                    <header class="service-header">
+                        <span class="service-icon">✨</span>
+                        <h3>Professional Growth</h3>
+                    </header>
+                    <ul class="service-list">
+                        <li>Portfolio Development</li>
+                        <li>Artist Management</li>
+                        <li>Gallery Showcasing & Exhibits</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ────────── WHO WE ARE ────────── -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-layout">
+                <!-- Left: Life Canvas Visuals -->
+                <div class="about-visual-col">
+                    <div class="life-canvas">
+                        <!-- Custom SVG Infrastructure for Trails -->
+                        <svg class="visual-infrastructure" viewBox="0 0 500 400" fill="none">
+                            <path d="M150 150 C 200 80, 400 80, 450 150" stroke="rgba(0,0,0,0.2)" stroke-width="2"
+                                stroke-dasharray="6 6" />
+                            <path d="M250 350 C 300 380, 400 350, 430 280" stroke="rgba(0,0,0,0.2)" stroke-width="2"
+                                stroke-dasharray="6 6" />
+                            <!-- Small Color Markers in Trails -->
+                            <rect x="320" y="80" width="8" height="8" fill="#FFC7AD" transform="rotate(45 320 80)" />
+                            <rect x="380" y="95" width="8" height="8" fill="#FFF4AD" transform="rotate(-15 380 95)" />
+                            <rect x="330" y="365" width="8" height="8" fill="#ADF7FF" transform="rotate(10 330 365)" />
+                            <rect x="385" y="355" width="8" height="8" fill="#FFF4AD" transform="rotate(30 385 355)" />
+                        </svg>
+
+                        <!-- Polaroid-style Art Snippets -->
+                        <div class="polaroid p-man" style="--rot: -8deg">
+                            <img src="ruchit.png" alt="Ruchit">
+                        </div>
+                        <div class="polaroid p-mill" style="--rot: 5deg">
+                            <img src="studio.jpg" alt="Studio">
+                        </div>
+                        <div class="polaroid p-field" style="--rot: -5deg">
+                            <img src="khat.jpg.jpeg" alt="Poland">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Editorial Story -->
+                <div class="about-content-col">
+                    <header class="about-header">
+                        <h2 class="about-heading">Who we are <em>(and why that matters)</em></h2>
+                        <p class="about-mini-sub">Finally, meet the vision behind the studio!</p>
+                    </header>
+                    <div class="about-story">
+                        <p>We are a dedicated collective of artists and educators based in NIFT, driven by a love for
+                            <span class="handwritten">foundational mastery</span> and <span class="handwritten">creative
+                                action</span>. We are proud to be an institute
+                            affiliated with
+                            <span class="logo-trigger handwritten">
+                                Skill India
+                                <span class="pop-logo"><img src="skill_india.svg" alt="Skill India Logo"></span>
+                            </span>
+                            and
+                            <span class="logo-trigger handwritten">
+                                NSDPI
+                                <span class="pop-logo"><img src="logo-nsdpi.png" alt="NSDPI Logo"></span>
+                            </span>,
+                            ensuring our curriculum meets the highest national standards. Over the years, we've built a
+                            sanctuary where <span class="handwritten">classical techniques</span> meet <span
+                                class="handwritten">contemporary vision</span>, guiding hundreds of students across fine
+                            arts, fashion, and visual storytelling.
+                        </p>
+                        <p>That same drive to communicate clearly and explore new perspectives shows up in how we teach,
+                            and how we live. We speak the language of oils, charcoal, and fabric, learning the nuances
+                            of <span class="handwritten">artistic soul</span> every single day — <span
+                                class="handwritten">one brushstroke at a time</span> ;)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Row: Reversed Layout -->
+            <div class="about-layout layout-reverse">
+                <!-- Left: Secondary Story -->
+                <div class="about-content-col">
+                    <div class="about-story">
+                        <p>Artistic expression has always been <span class="handwritten">our core</span> — from
+                            childhood sketches scattered in studios to designing full collections and hosting curation
+                            workshops. When we're not teaching, you'll find us capturing the <span
+                                class="handwritten">soul of the city</span> on canvas, exploring street textures, or
+                            vibing with our creative community as we’re always drawn to <span
+                                class="handwritten">creative momentum</span>.</p>
+                        <p>Because, at the heart of it all, we love helping artistic visions move faster, <span
+                                class="handwritten">clearer</span>, and with profound depth. When pieces click, your
+                            vision becomes <span class="handwritten">undeniable</span>.</p>
+                    </div>
+                </div>
+
+                <!-- Right: Life Canvas Secondary -->
+                <div class="about-visual-col">
+                    <div class="life-canvas secondary-canvas">
+                        <svg class="visual-infrastructure" viewBox="0 0 500 400" fill="none">
+                            <path d="M50 150 C 100 80, 200 80, 250 150" stroke="rgba(146, 212, 251, 0.4)"
+                                stroke-width="2" stroke-dasharray="6 6" />
+                        </svg>
+
+                        <div class="polaroid p-run" style="--rot: 8deg">
+                            <img src="ed trip/IMG_20251206_161327066.jpg" alt="Momentum">
+                        </div>
+                        <div class="polaroid p-bigben" style="--rot: -5deg">
+                            <img src="ed trip/WhatsApp Image 2025-12-07 at 11.45.48 AM (1).jpeg" alt="Travel">
+                        </div>
+                        <div class="polaroid p-food" style="--rot: 10deg">
+                            <img src="ed trip/WhatsApp Image 2026-02-08 at 10.29.39 PM (1).jpeg" alt="Vibe">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────── REAL TALK SECTION ────────── -->
+    <section id="real-talk" class="real-talk-section">
+        <div class="container">
+            <h2 class="real-talk-heading">Who we teach: <br> Real student talk</h2>
+            <p class="real-talk-subtext">Real results, real collaboration. Here's how past students describe <br>
+                working together – from first stroke to final masterpiece.</p>
+
+            <div id="student-talk-grid" class="real-talk-cards">
+                <div class="video-card-small">
+                    <video loop muted playsinline preload="auto">
+                        <source src="testiminol/1t.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-card-small">
+                    <video loop muted playsinline preload="auto">
+                        <source src="testiminol/2t.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-card-small">
+                    <video loop muted playsinline preload="auto">
+                        <source src="testiminol/3t.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ────────── EDUCATION TRIPS ────────── -->
+    <section id="experimental" class="section lab-section">
+        <div class="container">
+            <div class="lab-inner">
+                <span class="section-tag">EDUCATION TRIPS</span>
+                <h2 class="section-headline">Exploring Art<br><em>Beyond the Studio.</em></h2>
+                <p class="lab-sub">Our education trips connect students with real-world heritage, galleries, and
+                    cultural experiences that redefine their artistic perspective.</p>
+            </div>
+        </div>
+
+        <div class="hanging-gallery-container">
+            <div class="hanging-gallery">
+                <!-- ROW 1 (5 Photos) -->
+                <a href="ed trip/IMG_20251206_161324261.jpg" target="_blank" class="photo-item"><img
+                        src="ed trip/IMG_20251206_161324261.jpg" alt="Trip"></a>
+                <a href="ed trip/WhatsApp Image 2026-02-08 at 10.29.41 PM.jpeg" target="_blank" class="photo-item"><img
+                        src="ed trip/WhatsApp Image 2026-02-08 at 10.29.41 PM.jpeg" alt="Trip"></a>
+                <a href="ed trip/IMG_20251206_161351658.jpg" target="_blank" class="photo-item"><img
+                        src="ed trip/IMG_20251206_161351658.jpg" alt="Trip"></a>
+                <a href="ed trip/IMG_20251206_170530915.jpg" target="_blank" class="photo-item"><img
+                        src="ed trip/IMG_20251206_170530915.jpg" alt="Trip"></a>
+                <a href="ed trip/WhatsApp Image 2025-11-06 at 12.29.56 PM.jpeg" target="_blank" class="photo-item"><img
+                        src="ed trip/WhatsApp Image 2025-11-06 at 12.29.56 PM.jpeg" alt="Trip"></a>
+
+                <!-- ROW 2 (3 Photos) -->
+                <a href="ed trip/WhatsApp Image 2025-12-07 at 11.45.48 AM (1).jpeg" target="_blank"
+                    class="photo-item"><img src="ed trip/WhatsApp Image 2025-12-07 at 11.45.48 AM (1).jpeg"
+                        alt="Trip"></a>
+                <a href="ed trip/WhatsApp Image 2025-12-07 at 11.45.53 AM.jpeg" target="_blank" class="photo-item"><img
+                        src="ed trip/WhatsApp Image 2025-12-07 at 11.45.53 AM.jpeg" alt="Trip"></a>
+                <a href="ed trip/WhatsApp Image 2026-02-08 at 10.29.42 PM.jpeg" target="_blank" class="photo-item"><img
+                        src="ed trip/WhatsApp Image 2026-02-08 at 10.29.42 PM.jpeg" alt="Trip"></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────── CTA SECTION ────────── -->
+    <!-- ────────── REGISTRATION FORM ────────── -->
+    <section id="enroll" class="registration-section">
+        <div class="container">
+            <div class="registration-grid bounce-grid">
+                <div class="registration-content">
+                    <span class="registration-mini">JOIN THE CREATIVE REVOLUTION</span>
+                    <h2 class="registration-title">Ready to start <br> your <em>journey?</em></h2>
+                    <p class="registration-desc">Fill out the form to reserve your spot. Our team will get in touch with
+                        you to finalize your enrollment and discuss the curriculum.</p>
+
+                    <div class="registration-benefits">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <span>Hands-on Mentorship</span>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <span>Portfolio Development</span>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <span>Skill India Affiliated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registration-form-wrap">
+                    <form
+                        action="https://script.google.com/macros/s/AKfycbxtlCVJtsRb4I1QPZjRDFpMy2pUSf7VYunslhMVhMzSHMqRDTilfJFyjvSv1aqCYRQ2ag/exec"
+                        method="POST" class="registration-form" id="enrollForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Rohan Gupta" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="kalacorecreations@gmail.com"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+91 80773 67055" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="course">Interested In</label>
+                                <select id="course" name="course" required>
+                                    <option value="" disabled selected>Select a path</option>
+                                    <option value="Fine Arts">Fine Art</option>
+                                    <option value="Fashion">Fashion</option>
+                                    <option value="Diploma in Fine Art">Diploma in Fine Art</option>
+                                    <option value="Diploma in Fashion">Diploma in Fashion</option>
+                                    <option value="Hobby Class">Hobby Class</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="message">Message (Optional)</label>
+                                <textarea id="message" name="message" rows="3"
+                                    placeholder="Tell us briefly about your art goals..."></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span>SUBMIT ENROLLMENT</span>
+                            <div class="btn-icon">↗</div>
+                        </button>
+                    </form>
+                    <div id="formStatus" class="form-status"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────── FOOTER ────────── -->
+    <footer id="footer" class="footer-section">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="logo.svg" alt="Kalacore" class="footer-logo">
+                    <p class="footer-tagline">Designing the future, one pixel at a time.</p>
+                </div>
+                <div class="footer-affiliation">
+                    <span class="aff-label">Affiliated with</span>
+                    <div class="aff-logos">
+                        <div class="logo-badge"><img src="skill_india.svg" alt="Skill India"></div>
+                        <div class="logo-badge"><img src="logo-nsdpi.png" alt="NSDPI"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Studio</h4>
+                    <a href="#about">About</a>
+                    <a href="#real-talk">Work</a>
+                    <a href="#experimental">Process</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="https://www.linkedin.com/in/kalacore-creations-225412349?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                        target="_blank">LinkedIn</a>
+                    <a href="https://www.instagram.com/kalacore_art_classes?igsh=MXVocDh0b2t2d290eA=="
+                        target="_blank">Instagram</a>
+                    <a href="https://youtube.com/@kalacore_art_classes?si=tY84wCbBZfweGU8a" target="_blank">YouTube</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="mailto:kalacorecreations@gmail.com"
+                        class="footer-contact-link">kalacorecreations@gmail.com</a>
+                    <a href="https://wa.me/918077367055" target="_blank" class="footer-contact-link">80773 67055 (Call /
+                        WhatsApp)</a>
+                    <a href="https://wa.me/918273918360" target="_blank" class="footer-contact-link">82739 18360 (Call /
+                        WhatsApp)</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 KALACORE CREATION · ALL RIGHTS RESERVED</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Popup Overlay -->
+    <div id="successOverlay" class="success-overlay">
+        <div class="success-card">
+            <div class="success-icon">✓</div>
+            <h3 class="success-title">Application Sent!</h3>
+            <p class="success-msg">Your creative journey with Kalacore begins soon. We'll reach out to you within 24
+                hours.</p>
+            <button class="close-success" id="closeSuccess">PERFECT</button>
+        </div>
+    </div>
+
+    <script src="main.js" defer></script>
+</body>
+
+</html>
