@@ -14,7 +14,7 @@ setTimeout(() => {
             preloader.style.display = 'none';
         }
     }
-}, 15000);
+}, 4000);
 
 // ─── CUSTOM CURSOR ───────────────────────────
 const cursor = document.getElementById('cursorDot');
@@ -90,7 +90,7 @@ const tickCursor = () => {
 requestAnimationFrame(tickCursor);
 
 function refreshCursorHover() {
-    document.querySelectorAll('a, button, .project-card, .text-block, .btn-pill, .video-card, .glimpse-card').forEach(el => {
+    document.querySelectorAll('a, button, .project-card, .text-block, .btn-pill, .video-card, .glimpse-card, .course-card').forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
     });
@@ -397,7 +397,7 @@ function initApp() {
         const loadProgress = { val: 0 };
         gsap.to(loadProgress, {
             val: 100,
-            duration: 10, // Exact 10 seconds as requested
+            duration: 2, // Further reduced to 2s to keep total load under 3s
             ease: "none", // Linear fill for precision
             onUpdate: () => {
                 const p = Math.round(loadProgress.val);
@@ -422,7 +422,7 @@ function initApp() {
                 
                 gsap.to(preloader, {
                     yPercent: -100,
-                    duration: 1.2,
+                    duration: 0.8,
                     ease: "expo.inOut",
                     delay: 0.1,
                     onComplete: () => {
@@ -500,6 +500,20 @@ function initApp() {
     .from('.scroll-cue', {
         opacity: 0, duration: 1, ease: 'power2.out'
     }, '-=0.3');
+
+    // ─── COURSES SECTION ANIMATION ────────────────
+    gsap.from('.course-card', {
+        scrollTrigger: {
+            trigger: '.courses-grid',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power3.out'
+    });
 
     // ─── STUDENT WORK SCROLL ANIMATION ──────────────────
     gsap.utils.toArray('.glimpse-card').forEach((card, i) => {

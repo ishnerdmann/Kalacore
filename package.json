@@ -1,7 +1,7 @@
 {
   "name": "kalacore",
   "version": "1.0.0",
-  "description": "Kalacore Digital Art Studio",
+  "description": "Kalacore Fine Art Studio",
   "main": "main.js",
   "scripts": {
     "dev": "vite",
