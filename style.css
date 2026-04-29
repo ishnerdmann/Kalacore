@@ -2178,9 +2178,9 @@ a { text-decoration: none; color: inherit; }
 
 .courses-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3vw;
-    max-width: 1100px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 5vw;
 }
@@ -2273,6 +2273,12 @@ a { text-decoration: none; color: inherit; }
 
 .course-card:hover .course-cta {
     transform: translateX(4px);
+}
+
+@media (max-width: 1100px) {
+    .courses-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
