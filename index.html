@@ -954,6 +954,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// ─── VIDEO SOUND TOGGLE (Play Icon = Unmute, Pause Icon = Mute) ───
+const videoEl = document.getElementById('heroVideo');
+const playBtn = document.getElementById('videoToggle');
+if (videoEl && playBtn) {
+    playBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        videoEl.muted = !videoEl.muted;
+        
+        const pi = playBtn.querySelector('.play-icon');
+        const psi = playBtn.querySelector('.pause-icon');
+        
+        if (videoEl.muted) {
+            if (pi) pi.classList.remove('hidden');
+            if (psi) psi.classList.add('hidden');
+        } else {
+            if (pi) pi.classList.add('hidden');
+            if (psi) psi.classList.remove('hidden');
+        }
+    });
+}
+
 // ─── REGISTRATION FORM HANDLER ────────────────
 const enrollForm = document.getElementById('enrollForm');
 const formStatus = document.getElementById('formStatus');
