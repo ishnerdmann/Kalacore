@@ -937,6 +937,78 @@ function updateTime() {
 }
 setInterval(updateTime, 1000);
 updateTime();
+// ─── SMOOTH SCROLL FOR ANCHOR LINKS (LENIS) ───
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement && lenis) {
+            lenis.scrollTo(targetElement, { offset: -80 });
+            // Close mobile menu if open
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        }
+    });
+});
+
+// ─── REGISTRATION FORM HANDLER ────────────────
+const enrollForm = document.getElementById('enrollForm');
+const formStatus = document.getElementById('formStatus');
+const successOverlay = document.getElementById('successOverlay');
+const closeSuccess = document.getElementById('closeSuccess');
+
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtlCVJtsRb4I1QPZjRDFpMy2pUSf7VYunslhMVhMzSHMqRDTilfJFyjvSv1aqCYRQ2ag/exec';
+
+if (enrollForm) {
+    enrollForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Stop page redirect!
+        const submitBtn = document.getElementById('submitBtn');
+        const originalText = submitBtn.innerHTML;
+        
+        // Visual Feedback
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>SENDING...</span>';
+        
+        const formData = new FormData(enrollForm);
+        
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+        })
+        .then(() => {
+            if (successOverlay) {
+                successOverlay.classList.add('active');
+                setTimeout(() => {
+                    successOverlay.classList.remove('active');
+                }, 4000); // 4 seconds
+            }
+            enrollForm.reset();
+            if (formStatus) formStatus.textContent = '';
+        })
+        .catch(error => {
+            console.error('Submission Error:', error);
+            if (formStatus) {
+                formStatus.textContent = '✕ Error in sending. Please try again.';
+                formStatus.style.color = '#e63946';
+            }
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        });
+    });
+}
+
+if (closeSuccess && successOverlay) {
+    closeSuccess.addEventListener('click', () => {
+        successOverlay.classList.remove('active');
+    });
+}
     </script>
 </body>
 

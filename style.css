@@ -2116,7 +2116,7 @@ a { text-decoration: none; color: inherit; }
     background: url('cursor.svg') no-repeat center center;
     background-size: contain;
     position: fixed;
-    top: -40px; left: -40px;
+    top: -4px; left: -4px;
     pointer-events: none;
     z-index: 20000;
     opacity: 1; 
