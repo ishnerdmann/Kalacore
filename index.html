@@ -995,6 +995,11 @@ document.querySelectorAll('.video-card-small').forEach(card => {
             if (typeof cursor !== 'undefined' && cursor) cursor.classList.add('hovered');
         });
         
+        // Add click to toggle sound if blocked by browser
+        card.addEventListener('click', () => {
+            v.muted = !v.muted;
+        });
+        
         card.addEventListener('mouseleave', () => {
             v.pause();
             v.muted = true;
