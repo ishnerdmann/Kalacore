@@ -1,11 +1,11 @@
-console.log('MainEngine: Script loading v1.5...');
+
 let lenis; // Define globally
 
 
 // ─── ENTRANCE ANIMATIONS ───
 const initEntranceAnimations = () => {
     if (typeof gsap === 'undefined') return;
-    console.log('MainEngine: Starting entrance animations');
+
     
     gsap.from('.video-card', { opacity: 0, scale: 0.8, y: 30, duration: 1, ease: 'back.out(1.4)' });
     gsap.from('.hero-eyebrow', { opacity: 0, y: 10, duration: 0.7, delay: 0.3 });
@@ -89,7 +89,7 @@ refreshCursorHover();
 
 // ─── APP INITIALIZATION ───
 function initApp() {
-    console.log('MainEngine: App Initialization triggered');
+
     
     // Start entrance animations immediately
     initEntranceAnimations();
@@ -161,6 +161,116 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
     initApp();
+}
+
+
+// ─── VIDEO SOUND TOGGLE (Play Icon = Unmute, Pause Icon = Mute) ───
+const videoEl = document.getElementById('heroVideo');
+const playBtn = document.getElementById('videoToggle');
+if (videoEl && playBtn) {
+    playBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        videoEl.muted = !videoEl.muted;
+        
+        const pi = playBtn.querySelector('.play-icon');
+        const psi = playBtn.querySelector('.pause-icon');
+        
+        if (videoEl.muted) {
+            if (pi) pi.classList.remove('hidden');
+            if (psi) psi.classList.add('hidden');
+        } else {
+            if (pi) pi.classList.add('hidden');
+            if (psi) psi.classList.remove('hidden');
+        }
+    });
+}
+
+// ─── WHO WE TEACH VIDEOS (HOVER PLAY/PAUSE) ───
+document.querySelectorAll('.video-card-small').forEach(card => {
+    const v = card.querySelector('video');
+    if (v) {
+        v.pause();
+        
+        card.addEventListener('mouseenter', () => {
+            v.currentTime = 0;
+            v.muted = false;
+            v.volume = 1.0;
+            const playPromise = v.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    v.muted = true;
+                    v.play();
+                });
+            }
+            if (typeof cursor !== 'undefined' && cursor) cursor.classList.add('hovered');
+        });
+        
+        card.addEventListener('click', () => {
+            v.muted = !v.muted;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            v.pause();
+            v.muted = true;
+            if (typeof cursor !== 'undefined' && cursor) cursor.classList.remove('hovered');
+        });
+    }
+});
+
+// ─── REGISTRATION FORM HANDLER ────────────────
+const enrollForm = document.getElementById('enrollForm');
+const formStatus = document.getElementById('formStatus');
+const successOverlay = document.getElementById('successOverlay');
+const closeSuccess = document.getElementById('closeSuccess');
+
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtlCVJtsRb4I1QPZjRDFpMy2pUSf7VYunslhMVhMzSHMqRDTilfJFyjvSv1aqCYRQ2ag/exec';
+
+if (enrollForm) {
+    enrollForm.addEventListener('submit', (e) => {
+        e.preventDefault(); 
+        const submitBtn = document.getElementById('submitBtn');
+        if (!submitBtn) return;
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>SENDING...</span>';
+        
+        const formData = new FormData(enrollForm);
+        
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+        })
+        .then(() => {
+            if (successOverlay) {
+                successOverlay.classList.add('active');
+                setTimeout(() => {
+                    successOverlay.classList.remove('active');
+                }, 4000); 
+            }
+            enrollForm.reset();
+            if (formStatus) formStatus.textContent = '';
+        })
+        .catch(error => {
+            console.error('Submission Error:', error);
+            if (formStatus) {
+                formStatus.textContent = '✕ Error in sending. Please try again.';
+                formStatus.style.color = '#e63946';
+            }
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        });
+    });
+}
+
+
+if (closeSuccess && successOverlay) {
+    closeSuccess.addEventListener('click', () => {
+        successOverlay.classList.remove('active');
+    });
 }
 
 // ─── NAV TIME ───
