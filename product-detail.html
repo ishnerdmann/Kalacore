@@ -202,10 +202,6 @@
 
                 // Update Title
                 document.title = `${product.title} - Kalacore Fine Art Studio`;
-
-                // Show Container
-                const container = document.querySelector('.product-detail-container');
-                if (container) container.style.opacity = '1';
             }
         });
 
@@ -241,11 +237,6 @@
             });
         });
     </script>
-    <style>
-        .product-detail-container { opacity: 0; transition: opacity 0.4s ease-out; }
-        .detail-main-img { transition: transform 0.6s var(--ease); }
-        .detail-main-img.loading { filter: blur(10px); }
-    </style>
 </head>
 <body class="product-page-body">
 
@@ -301,23 +292,23 @@
                     <div class="product-specs-grid">
                         <div class="spec-item">
                             <span class="spec-label">Medium</span>
-                            <span class="spec-val">Natural pigments on handmade paper</span>
+                            <span class="spec-val"></span>
                         </div>
                         <div class="spec-item">
                             <span class="spec-label">Size</span>
-                            <span class="spec-val">16 × 24 inches</span>
+                            <span class="spec-val"></span>
                         </div>
                         <div class="spec-item">
                             <span class="spec-label">Year</span>
-                            <span class="spec-val">2024</span>
+                            <span class="spec-val"></span>
                         </div>
                         <div class="spec-item">
                             <span class="spec-label">Edition</span>
-                            <span class="spec-val">Original, 1 of 1</span>
+                            <span class="spec-val"></span>
                         </div>
                     </div>
 
-                    <a href="https://wa.me/918077367055?text=Hi, I'm interested in booking 'Mor Utsav' painting." class="whatsapp-book-btn">
+                    <a href="#" class="whatsapp-book-btn">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.224-3.82l.303.18c1.397.831 3.013 1.27 4.673 1.271 5.233 0 9.491-4.258 9.493-9.493.002-2.537-.987-4.922-2.787-6.723s-4.187-2.79-6.723-2.791c-5.233 0-9.491 4.258-9.493 9.493-.001 1.745.476 3.447 1.381 4.93l.198.324-1.107 4.04 4.14-1.085z"/>
                             <path d="M17.476 14.304c-.329-.165-1.947-.96-2.249-1.07-.302-.109-.522-.165-.742.165-.219.329-.851 1.07-1.042 1.29-.191.219-.383.246-.712.081-.329-.165-1.389-.512-2.645-1.631-.977-.872-1.636-1.95-1.828-2.279-.191-.329-.02-.507.145-.671.148-.148.329-.383.493-.575.165-.192.219-.329.329-.548.11-.219.055-.411-.027-.575-.082-.164-.742-1.787-1.015-2.445-.267-.641-.539-.555-.742-.565-.192-.01-.411-.011-.63-.011s-.575.082-.876.411c-.301.33-1.15 1.123-1.15 2.738 0 1.616 1.178 3.177 1.342 3.396.164.219 2.318 3.54 5.615 4.965.784.339 1.396.541 1.874.693.788.251 1.505.215 2.072.13.632-.094 1.947-.795 2.221-1.562.273-.767.273-1.424.192-1.561-.081-.137-.301-.219-.63-.384z"/>
