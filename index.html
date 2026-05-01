@@ -975,6 +975,34 @@ if (videoEl && playBtn) {
     });
 }
 
+// ─── WHO WE TEACH VIDEOS (HOVER PLAY/PAUSE) ───
+document.querySelectorAll('.video-card-small').forEach(card => {
+    const v = card.querySelector('video');
+    if (v) {
+        v.pause();
+        
+        card.addEventListener('mouseenter', () => {
+            v.currentTime = 0;
+            v.muted = false;
+            v.volume = 1.0;
+            const playPromise = v.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    v.muted = true;
+                    v.play();
+                });
+            }
+            if (typeof cursor !== 'undefined' && cursor) cursor.classList.add('hovered');
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            v.pause();
+            v.muted = true;
+            if (typeof cursor !== 'undefined' && cursor) cursor.classList.remove('hovered');
+        });
+    }
+});
+
 // ─── REGISTRATION FORM HANDLER ────────────────
 const enrollForm = document.getElementById('enrollForm');
 const formStatus = document.getElementById('formStatus');
