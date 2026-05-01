@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commission Art - Kalacore Fine Art Studio</title>
+    <link rel="stylesheet" href="style.css?v=1.4">
+    <!-- Libs -->
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="main.js" defer></script>
+</head>
+<body class="commission-page-body">
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-drop" id="cursorDrop"></div>
+
+    <!-- ────────── NAVIGATION ────────── -->
+    <nav class="navbar shop-navbar" id="navbar">
+        <div class="shop-nav-left">
+            <a href="index.html" class="nav-logo" aria-label="Kalacore Home">
+                <img src="logo.svg" alt="Kalacore Logo" class="logo-svg">
+            </a>
+        </div>
+        <ul class="nav-links shop-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html#all-art">Shop</a></li>
+            <li><a href="commission.html" class="active-link">Custom</a></li>
+            <li><a href="index.html#about">About</a></li>
+        </ul>
+        <div class="shop-nav-right">
+            <a href="commission.html" class="shop-cta active-cta">Commission Art &rarr;</a>
+        </div>
+        <button class="nav-menu-toggle" aria-label="Menu">
+            <span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- ────────── COMMISSION FORM SECTION ────────── -->
+    <main class="commission-main">
+        <div class="commission-container">
+            <header class="commission-header">
+                <p class="section-eyebrow handwritten">made just for you</p>
+                <h1 class="commission-title">Commission a custom painting.</h1>
+                <p class="commission-subtitle">Send us a portrait photo or describe a scene — our artists will hand-paint it for you. Delivery in 2-4 weeks.</p>
+            </header>
+
+            <div class="commission-card">
+                <form id="commissionForm" class="commission-form">
+                    
+                    <!-- Type Selection -->
+                    <div class="form-section">
+                        <label class="form-label-with-icon">
+                            <span class="label-icon">🎨</span> What would you like?
+                        </label>
+                        <div class="commission-type-grid">
+                            <div class="type-tile active" data-type="Portrait" onclick="selectType(this, 'Portrait')">
+                                <span class="tile-title">Portrait</span>
+                                <span class="tile-desc">From your photo</span>
+                            </div>
+                            <div class="type-tile" data-type="Custom Brief" onclick="selectType(this, 'Custom Brief')">
+                                <span class="tile-title">Custom Brief</span>
+                                <span class="tile-desc">Describe a scene</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Name -->
+                    <div class="form-section">
+                        <label class="form-label-with-icon">
+                            <span class="label-icon">👤</span> Your name
+                        </label>
+                        <input type="text" id="commName" placeholder="e.g. Riya Sharma" class="commission-input" required>
+                    </div>
+
+                    <!-- Style & Size -->
+                    <div class="form-row-grid">
+                        <div class="form-section">
+                            <label class="form-label">Medium</label>
+                            <input type="text" id="commMedium" placeholder="e.g. Oil on Canvas" class="commission-input">
+                        </div>
+                        <div class="form-section">
+                            <label class="form-label">Size</label>
+                            <input type="text" id="commSize" placeholder="12 × 16 in" class="commission-input">
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-section">
+                        <label class="form-label" id="descLabel">Tell us about the portrait</label>
+                        <div class="textarea-wrap">
+                            <textarea id="descTextarea" placeholder="e.g. Portrait of my parents on their 25th anniversary, traditional attire, warm tones..." class="commission-textarea" maxlength="1000"></textarea>
+                            <span class="char-counter">0/1000</span>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Photos Message -->
+                    <div class="form-section whatsapp-photo-hint">
+                        <div class="hint-card">
+                            <span class="hint-icon">📸</span>
+                            <div class="hint-content">
+                                <p class="hint-title">Share Reference Images on WhatsApp</p>
+                                <p class="hint-text">Once you click the button below, your WhatsApp will open with the details. Please attach your reference photos in the same chat for our artists.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="whatsapp-submit-btn">
+                        Send Request on WhatsApp
+                    </button>
+                    <p class="price-disclaimer">Starting from ₹3,500 · Final quote shared on WhatsApp</p>
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- ────────── FOOTER ────────── -->
+    <footer id="footer" class="footer-section">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="logo.svg" alt="Kalacore" class="footer-logo">
+                    <p class="footer-tagline">Designing the future, one brushstroke at a time.</p>
+                </div>
+                <div class="footer-affiliation">
+                    <span class="aff-label">Affiliated with</span>
+                    <div class="aff-logos">
+                        <div class="logo-badge"><img src="skill_india.svg" alt="Skill India"></div>
+                        <div class="logo-badge"><img src="logo-nsdpi.png" alt="NSDPI"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Studio</h4>
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#real-talk">Work</a>
+                    <a href="index.html#experimental">Process</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="https://www.linkedin.com/in/kalacore-creations-225412349?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                        target="_blank">LinkedIn</a>
+                    <a href="https://www.instagram.com/kalacore_art_classes?igsh=MXVocDh0b2t2d290eA=="
+                        target="_blank">Instagram</a>
+                    <a href="https://youtube.com/@kalacore_art_classes?si=tY84wCbBZfweGU8a" target="_blank">YouTube</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="mailto:kalacorecreations@gmail.com"
+                        class="footer-contact-link">kalacorecreations@gmail.com</a>
+                    <a href="https://wa.me/918077367055" target="_blank" class="footer-contact-link">80773 67055 (Call /
+                        WhatsApp)</a>
+                    <a href="https://wa.me/918273918360" target="_blank" class="footer-contact-link">82739 18360 (Call /
+                        WhatsApp)</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 KALACORE FINE ART STUDIO · ALL RIGHTS RESERVED</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let selectedType = 'Portrait';
+
+        function selectType(el, type) {
+            selectedType = type;
+            document.querySelectorAll('.type-tile').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+
+            const label = document.getElementById('descLabel');
+            const textarea = document.getElementById('descTextarea');
+
+            if (type === 'Custom Brief') {
+                label.textContent = 'Tell us about the custom brief';
+                textarea.placeholder = 'e.g. A surreal scene of a futuristic city with traditional Indian architecture, sunset sky...';
+            } else {
+                label.textContent = 'Tell us about the portrait';
+                textarea.placeholder = 'e.g. Portrait of my parents on their 25th anniversary, traditional attire, warm tones...';
+            }
+        }
+
+        const form = document.getElementById('commissionForm');
+        form.onsubmit = (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('commName').value;
+            const medium = document.getElementById('commMedium').value || 'Not specified';
+            const size = document.getElementById('commSize').value || 'Not specified';
+            const description = document.getElementById('descTextarea').value;
+
+            const message = `Hi Kalacore Team! I'd like to commission a custom painting.
+
+*Request Details:*
+- Type: ${selectedType}
+- Name: ${name}
+- Medium: ${medium}
+- Size: ${size}
+- Description: ${description}
+
+I will share the reference photos in this chat.`;
+
+            const encodedMsg = encodeURIComponent(message);
+            
+            // First Number
+            const whatsappUrl1 = `https://wa.me/918077367055?text=${encodedMsg}`;
+            // Second Number
+            const whatsappUrl2 = `https://wa.me/918273918360?text=${encodedMsg}`;
+            
+            window.open(whatsappUrl1, '_blank');
+            // Small delay to help with popup blockers
+            setTimeout(() => {
+                window.open(whatsappUrl2, '_blank');
+            }, 500);
+        };
+    </script>
+
+</body>
+</html>

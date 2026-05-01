@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalacore | Products</title>
+    <meta name="description"
+        content="Discover and acquire exclusive artworks from Kalacore Fine Art Studio. Request custom commissions tailored to your vision.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@300;400;500;700&family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1.2">
+    <!-- Libs (Using reliable CDNs to avoid local 404 issues) -->
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="main.js" defer></script>
+</head>
+
+<body>
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-drop" id="cursorDrop"></div>
+
+    <!-- ────────── NAVIGATION ────────── -->
+    <nav class="navbar shop-navbar" id="navbar">
+        <div class="shop-nav-left">
+            <a href="index.html" class="nav-logo" aria-label="Kalacore Home">
+                <img src="logo.svg" alt="Kalacore Logo" class="logo-svg">
+            </a>
+        </div>
+        <ul class="nav-links shop-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html#all-art" class="active-link">Shop</a></li>
+            <li><a href="commission.html">Custom</a></li>
+            <li><a href="index.html#about">About</a></li>
+        </ul>
+        <div class="shop-nav-right">
+            <a href="commission.html" class="shop-cta">Commission Art &rarr;</a>
+        </div>
+        <button class="nav-menu-toggle" aria-label="Menu">
+            <span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- ────────── SHOP HERO ────────── -->
+    <section class="hero-section shop-hero">
+        <div class="grain-overlay"></div>
+
+        <!-- Floating illustrations (reusing home page assets) -->
+        <div class="hero-illus hero-illus--left" id="illusLeft">
+            <img src="assets/char-left.svg" alt="Illustration">
+        </div>
+        <div class="hero-illus hero-illus--right" id="illusRight">
+            <img src="assets/char-right.svg" alt="Illustration">
+        </div>
+
+        <div class="hero-center">
+            <p class="hero-eyebrow">Discover Our Collection</p>
+            <h1 class="hero-headline">
+                Curated <span class="handwritten">Artworks</span> <br>
+                for your <span class="handwritten">space.</span>
+            </h1>
+            <p class="hero-subtext">
+                Explore our exclusive selection of original oil paintings, sketches, and digital art created by Kalacore's finest artists. Each piece tells a unique story.
+            </p>
+            <div class="hero-cta-wrap">
+                <a href="#shop" class="btn-pill">
+                    Browse Shop
+                    <span class="btn-arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────── FEATURED SECTION ────────── -->
+    <section class="featured-section">
+        <div class="shop-container">
+            <div class="section-header">
+                <div class="header-left">
+                    <p class="section-eyebrow handwritten">this week's picks</p>
+                    <h2 class="section-title">Featured paintings</h2>
+                </div>
+                <a href="#all-art" class="view-all">View all &rarr;</a>
+            </div>
+
+            <div class="product-grid">
+                
+                <!-- Painting 1 -->
+                <a href="product-detail.html?id=mor-utsav" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <div class="badge-row">
+                                <span class="badge bestseller">BESTSELLER</span>
+                                <span class="badge discount">29% OFF</span>
+                            </div>
+                            <img src="kalacore abstract 2.jpg.jpeg" alt="Mor Utsav" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Mor Utsav</h3>
+                            <p class="product-subtitle">Aanya Sharma · Madhubani</p>
+                            <div class="product-rating">
+                                <div class="rating-box">
+                                    <span class="rating-val">4.8</span>
+                                    <span class="star">★</span>
+                                </div>
+                                <span class="reviews">(142)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹8,500</span>
+                                <span class="price-old">₹12,000</span>
+                                <span class="discount-pct">29% off</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Painting 2 -->
+                <a href="product-detail.html?id=kashi-bhor" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <div class="badge-row">
+                                <span class="badge bestseller" style="visibility: hidden;">.</span> <!-- Spacer -->
+                                <span class="badge discount">27% OFF</span>
+                            </div>
+                            <img src="The silence of nature.jpg.jpeg" alt="Kashi Bhor" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Kashi Bhor</h3>
+                            <p class="product-subtitle">Ishaan Mehta · Watercolor</p>
+                            <div class="product-rating">
+                                <div class="rating-box" style="background: #27ae60;">
+                                    <span class="rating-val">4.6</span>
+                                    <span class="star">★</span>
+                                </div>
+                                <span class="reviews">(89)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹6,200</span>
+                                <span class="price-old">₹8,500</span>
+                                <span class="discount-pct">27% off</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Painting 3 -->
+                <a href="product-detail.html?id=vrindavan-leela" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <div class="badge-row">
+                                <span class="badge premium">PREMIUM</span>
+                                <span class="badge discount">24% OFF</span>
+                            </div>
+                            <img src="3.jpg" alt="Vrindavan Leela" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Vrindavan Leela</h3>
+                            <p class="product-subtitle">Radhika Joshi · Pichwai</p>
+                            <div class="product-rating">
+                                <div class="rating-box" style="background: #27ae60;">
+                                    <span class="rating-val">4.9</span>
+                                    <span class="star">★</span>
+                                </div>
+                                <span class="reviews">(67)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹14,500</span>
+                                <span class="price-old">₹19,000</span>
+                                <span class="discount-pct">24% off</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- ────────── EXPLORE ALL WORKS ────────── -->
+            <div class="section-header" id="all-art" style="margin-top: 80px;">
+                <div class="header-left">
+                    <p class="section-eyebrow handwritten">our full gallery</p>
+                    <h2 class="section-title">Explore All Works</h2>
+                </div>
+            </div>
+
+            <div class="product-grid">
+                <!-- Painting 4 -->
+                <a href="product-detail.html?id=golden-horizon" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <div class="badge-row">
+                                <span class="badge premium">PREMIUM</span>
+                                <span class="badge discount">15% OFF</span>
+                            </div>
+                            <img src="khat.jpg.jpeg" alt="Golden Horizon" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Golden Horizon</h3>
+                            <p class="product-subtitle">Sumit Kumar · Oil on Canvas</p>
+                            <div class="product-rating">
+                                <div class="rating-box"><span class="rating-val">4.7</span><span class="star">★</span></div>
+                                <span class="reviews">(45)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹15,500</span>
+                                <span class="price-old">₹18,200</span>
+                                <span class="discount-pct">15% off</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Painting 5 -->
+                <a href="product-detail.html?id=divine-grace" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <div class="badge-row">
+                                <span class="badge bestseller">BESTSELLER</span>
+                                <span class="badge discount">10% OFF</span>
+                            </div>
+                            <img src="/Users/manishjoshi/.gemini/antigravity/brain/bb16dc4d-56fa-4ba2-8f78-c4a6ec0d7eb0/divine_grace_painting_1777658484151.png" alt="Divine Grace" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Divine Grace</h3>
+                            <p class="product-subtitle">Meera Devi · Traditional Art</p>
+                            <div class="product-rating">
+                                <div class="rating-box"><span class="rating-val">4.9</span><span class="star">★</span></div>
+                                <span class="reviews">(112)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹22,000</span>
+                                <span class="price-old">₹24,500</span>
+                                <span class="discount-pct">10% off</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Painting 6 -->
+                <a href="product-detail.html?id=natures-whisper" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <div class="badge-row">
+                                <span class="badge discount">20% OFF</span>
+                            </div>
+                            <img src="1.jpeg" alt="Nature's Whisper" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Nature's Whisper</h3>
+                            <p class="product-subtitle">Vikram Singh · Landscape</p>
+                            <div class="product-rating">
+                                <div class="rating-box"><span class="rating-val">4.5</span><span class="star">★</span></div>
+                                <span class="reviews">(38)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹11,000</span>
+                                <span class="price-old">₹13,750</span>
+                                <span class="discount-pct">20% off</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Painting 7 -->
+                <a href="product-detail.html?id=the-calm-soul" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <img src="/Users/manishjoshi/.gemini/antigravity/brain/bb16dc4d-56fa-4ba2-8f78-c4a6ec0d7eb0/calm_soul_painting_1777658364166.png" alt="The Calm Soul" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">The Calm Soul</h3>
+                            <p class="product-subtitle">Ananya Roy · Portrait</p>
+                            <div class="product-rating">
+                                <div class="rating-box"><span class="rating-val">4.8</span><span class="star">★</span></div>
+                                <span class="reviews">(56)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹9,500</span>
+                                <span class="discount-pct" style="color: transparent;">.</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Painting 8 -->
+                <a href="product-detail.html?id=ethereal-beauty" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <div class="badge-row">
+                                <span class="badge bestseller">BESTSELLER</span>
+                            </div>
+                            <img src="/Users/manishjoshi/.gemini/antigravity/brain/bb16dc4d-56fa-4ba2-8f78-c4a6ec0d7eb0/ethereal_beauty_painting_1777658635107.png" alt="Ethereal Beauty" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Ethereal Beauty</h3>
+                            <p class="product-subtitle">Rohan Gupta · Contemporary</p>
+                            <div class="product-rating">
+                                <div class="rating-box"><span class="rating-val">4.7</span><span class="star">★</span></div>
+                                <span class="reviews">(94)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹13,200</span>
+                                <span class="price-old">₹15,000</span>
+                                <span class="discount-pct">12% off</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Painting 9 -->
+                <a href="product-detail.html?id=mystic-forest" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <div class="badge-row">
+                                <span class="badge premium">PREMIUM</span>
+                            </div>
+                            <img src="2.jpg" alt="Mystic Forest" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Mystic Forest</h3>
+                            <p class="product-subtitle">Karan Sharma · Acrylic</p>
+                            <div class="product-rating">
+                                <div class="rating-box"><span class="rating-val">4.9</span><span class="star">★</span></div>
+                                <span class="reviews">(72)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹18,900</span>
+                                <span class="price-old">₹21,000</span>
+                                <span class="discount-pct">10% off</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Painting 10 -->
+                <a href="product-detail.html?id=royal-heritage" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <div class="badge-row">
+                                <span class="badge premium">PREMIUM</span>
+                            </div>
+                            <img src="4.HEIC.jpeg" alt="Royal Heritage" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Royal Heritage</h3>
+                            <p class="product-subtitle">Rajesh Kumar · Classic</p>
+                            <div class="product-rating">
+                                <div class="rating-box"><span class="rating-val">5.0</span><span class="star">★</span></div>
+                                <span class="reviews">(28)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹35,000</span>
+                                <span class="discount-pct" style="color: transparent;">.</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Painting 11 -->
+                <a href="product-detail.html?id=abstract-mind" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <div class="badge-row">
+                                <span class="badge discount">30% OFF</span>
+                            </div>
+                            <img src="2.jpg.jpeg" alt="Abstract Mind" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Abstract Mind</h3>
+                            <p class="product-subtitle">Pooja Verma · Modern Art</p>
+                            <div class="product-rating">
+                                <div class="rating-box"><span class="rating-val">4.6</span><span class="star">★</span></div>
+                                <span class="reviews">(53)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹7,800</span>
+                                <span class="price-old">₹11,100</span>
+                                <span class="discount-pct">30% off</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Painting 12 -->
+                <a href="product-detail.html?id=village-life" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <img src="3.jpg.jpeg" alt="Village Life" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Village Life</h3>
+                            <p class="product-subtitle">Suresh Patel · Folk Art</p>
+                            <div class="product-rating">
+                                <div class="rating-box"><span class="rating-val">4.8</span><span class="star">★</span></div>
+                                <span class="reviews">(41)</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price-now">₹5,500</span>
+                                <span class="discount-pct" style="color: transparent;">.</span>
+                            </div>
+                            <p class="product-footer">Free shipping · Insured delivery</p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- ────────── CUSTOM ORDERS ────────── -->
+            <div class="custom-order-banner">
+                <h2 class="custom-banner-title">Bring Your Vision to Canvas</h2>
+                <p class="custom-banner-desc">Looking for something specific? We accept custom commission requests for portraits, landscapes, and conceptual art. Work directly with our studio artists to create a masterpiece tailored for your space.</p>
+                <a href="commission.html" class="custom-btn">Request Custom Artwork</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────── FOOTER ────────── -->
+    <footer id="footer" class="footer-section">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="logo.svg" alt="Kalacore" class="footer-logo">
+                    <p class="footer-tagline">Designing the future, one brushstroke at a time.</p>
+                </div>
+                <div class="footer-affiliation">
+                    <span class="aff-label">Affiliated with</span>
+                    <div class="aff-logos">
+                        <div class="logo-badge"><img src="skill_india.svg" alt="Skill India"></div>
+                        <div class="logo-badge"><img src="logo-nsdpi.png" alt="NSDPI"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Studio</h4>
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#real-talk">Work</a>
+                    <a href="index.html#experimental">Process</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="https://www.linkedin.com/in/kalacore-creations-225412349?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                        target="_blank">LinkedIn</a>
+                    <a href="https://www.instagram.com/kalacore_art_classes?igsh=MXVocDh0b2t2d290eA=="
+                        target="_blank">Instagram</a>
+                    <a href="https://youtube.com/@kalacore_art_classes?si=tY84wCbBZfweGU8a" target="_blank">YouTube</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="mailto:kalacorecreations@gmail.com"
+                        class="footer-contact-link">kalacorecreations@gmail.com</a>
+                    <a href="https://wa.me/918077367055" target="_blank" class="footer-contact-link">80773 67055 (Call /
+                        WhatsApp)</a>
+                    <a href="https://wa.me/918273918360" target="_blank" class="footer-contact-link">82739 18360 (Call /
+                        WhatsApp)</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 KALACORE FINE ART STUDIO · ALL RIGHTS RESERVED</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ────────── JAVASCRIPT ────────── -->
+</body>
+</html>

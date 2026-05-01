@@ -129,13 +129,31 @@ function initApp() {
 
     // Scroll Animations
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        document.querySelectorAll('.glimpse-card, .course-card, .about-layout, .lab-inner').forEach(el => {
+        document.querySelectorAll('.glimpse-card, .course-card, .about-layout, .lab-inner, .product-card, .custom-order-banner').forEach(el => {
             gsap.from(el, {
                 scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none reverse' },
                 opacity: 0, y: 30, duration: 0.8
             });
         });
     }
+
+    // Smooth Scroll for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId.startsWith('index.html')) return; 
+            e.preventDefault();
+            if (targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement && lenis) {
+                lenis.scrollTo(targetElement, { offset: -80 });
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            }
+        });
+    });
 }
 
 // ─── BOOTSTRAP ───
