@@ -13,48 +13,196 @@
     <script src="products-data.js"></script>
     <script src="main.js?v=1.5" defer></script>
     <script>
+        const productsData = {
+            "mor-utsav": {
+                title: "Mor Utsav",
+                artist: "Aanya Sharma",
+                year: "2024",
+                price: "₹8,500",
+                category: "Madhubani",
+                image: "kalacore abstract 2.jpg.jpeg",
+                description: "A vibrant Madhubani composition featuring a regal peacock surrounded by blooming marigolds. Hand-painted with natural pigments following the traditional Mithila style passed down through generations.",
+                medium: "Natural pigments on handmade paper",
+                size: "16 × 24 inches",
+                edition: "Original, 1 of 1"
+            },
+            "kashi-bhor": {
+                title: "Kashi Bhor",
+                artist: "Ishaan Mehta",
+                year: "2023",
+                price: "₹6,200",
+                category: "Watercolor",
+                image: "The silence of nature.jpg.jpeg",
+                description: "Capturing the ethereal morning light at the ghats of Varanasi. This watercolor piece uses soft bleeds and delicate layers to evoke the spiritual calm of the Ganges at dawn.",
+                medium: "Artist-grade watercolors on 300gsm cold-pressed paper",
+                size: "12 × 18 inches",
+                edition: "Original"
+            },
+            "vrindavan-leela": {
+                title: "Vrindavan Leela",
+                artist: "Radhika Joshi",
+                year: "2024",
+                price: "₹14,500",
+                category: "Pichwai",
+                image: "3.jpg",
+                description: "A detailed Pichwai painting depicting Shrinathji amidst the lush groves of Vrindavan. Gold foil accents and stone pigments bring a celestial glow to this traditional masterpiece.",
+                medium: "Stone pigments and gold foil on cotton fabric",
+                size: "24 × 36 inches",
+                edition: "Original"
+            },
+            "golden-horizon": {
+                title: "Golden Horizon",
+                artist: "Sumit Kumar",
+                year: "2024",
+                price: "₹15,500",
+                category: "Oil on Canvas",
+                image: "khat.jpg.jpeg",
+                description: "An expressive oil painting exploring the interplay of light and texture. The 'Golden Horizon' symbolizes hope and the infinite possibilities of the creative mind.",
+                medium: "Oil on stretched canvas",
+                size: "20 × 20 inches (Square)",
+                edition: "Original"
+            },
+            "divine-grace": {
+                title: "Divine Grace",
+                artist: "Meera Devi",
+                year: "2024",
+                price: "₹22,000",
+                category: "Traditional Art",
+                image: "divine-grace.png",
+                description: "A magnificent depiction of celestial grace, inspired by ancient temple murals. Intricate patterns and a rich palette create a sense of timeless devotion.",
+                medium: "Acrylic and mixed media",
+                size: "30 × 40 inches",
+                edition: "Original"
+            },
+            "natures-whisper": {
+                title: "Nature's Whisper",
+                artist: "Vikram Singh",
+                year: "2023",
+                price: "₹11,000",
+                category: "Landscape",
+                image: "1.jpeg",
+                description: "A serene landscape that captures the quiet conversation between the wind and the trees. Perfect for bringing a touch of nature's peace into a modern living space.",
+                medium: "Oil on canvas",
+                size: "18 × 24 inches",
+                edition: "Original"
+            },
+            "the-calm-soul": {
+                title: "The Calm Soul",
+                artist: "Ananya Roy",
+                year: "2024",
+                price: "₹9,500",
+                category: "Portrait",
+                image: "calm-soul.png",
+                description: "A meditative portrait exploring inner peace and silence. The soft, blended tones create a soothing visual experience that resonates with the viewer's own sense of calm.",
+                medium: "Oil on canvas",
+                size: "24 × 24 inches",
+                edition: "Original"
+            },
+            "ethereal-beauty": {
+                title: "Ethereal Beauty",
+                artist: "Rohan Gupta",
+                year: "2024",
+                price: "₹13,200",
+                category: "Contemporary",
+                image: "ethereal-beauty.png",
+                description: "A stunning contemporary abstract painting that explores fluid, ethereal shapes in shades of deep blue and gold. It represents the beauty found in movement and light.",
+                medium: "Mixed media on canvas",
+                size: "24 × 30 inches",
+                edition: "Original"
+            },
+            "mystic-forest": {
+                title: "Mystic Forest",
+                artist: "Karan Sharma",
+                year: "2023",
+                price: "₹18,900",
+                category: "Acrylic",
+                image: "2.jpg",
+                description: "A journey into the deep, mysterious heart of an enchanted forest. Vibrant colors and bold strokes create a dynamic and immersive environment.",
+                medium: "Acrylic on canvas",
+                size: "30 × 30 inches",
+                edition: "Original"
+            },
+            "royal-heritage": {
+                title: "Royal Heritage",
+                artist: "Rajesh Kumar",
+                year: "2024",
+                price: "₹35,000",
+                category: "Classic",
+                image: "4.HEIC.jpeg",
+                description: "A classic painting celebrating the rich cultural heritage of India. Gold leaf work and traditional motifs make this a truly regal addition to any collection.",
+                medium: "Oil and gold leaf on canvas",
+                size: "36 × 48 inches",
+                edition: "Original"
+            },
+            "abstract-mind": {
+                title: "Abstract Mind",
+                artist: "Pooja Verma",
+                year: "2024",
+                price: "₹7,800",
+                category: "Modern Art",
+                image: "2.jpg.jpeg",
+                description: "An exploration of thoughts and emotions through abstract form. This piece encourages personal interpretation and deep reflection.",
+                medium: "Acrylic and ink on paper",
+                size: "16 × 16 inches",
+                edition: "Original"
+            },
+            "village-life": {
+                title: "Village Life",
+                artist: "Suresh Patel",
+                year: "2024",
+                price: "₹5,500",
+                category: "Folk Art",
+                image: "3.jpg.jpeg",
+                description: "A charming depiction of daily life in an Indian village. Vibrant colors and simple forms capture the joy and community of rural living.",
+                medium: "Gouache on handmade paper",
+                size: "11 × 15 inches",
+                edition: "Original"
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const productId = params.get('id');
-            const product = productsData[productId] || productsData['mor-utsav']; // Fallback to mor-utsav
+            const product = productsData[productId] || productsData['mor-utsav'];
 
             if (product) {
-                // Update text content
+                // Update dynamic fields
                 document.querySelector('.product-main-title').textContent = product.title;
-                document.querySelector('.product-artist-tag strong').textContent = product.artist;
-                document.querySelector('.product-artist-tag').childNodes[2].textContent = ` · ${product.year}`;
+                const artistTag = document.querySelector('.product-artist-tag');
+                artistTag.innerHTML = `By <strong>${product.artist}</strong> · ${product.year}`;
                 document.querySelector('.product-detail-price').textContent = product.price;
                 document.querySelector('.product-cat-label').textContent = product.category;
                 document.querySelector('.product-description p').textContent = product.description;
                 
-                // Update specs
-                const specs = document.querySelectorAll('.spec-val');
-                specs[0].textContent = product.medium;
-                specs[1].textContent = product.size;
-                specs[2].textContent = product.year;
-                specs[3].textContent = product.edition;
+                // Update Specs
+                const specVals = document.querySelectorAll('.spec-val');
+                specVals[0].textContent = product.medium;
+                specVals[1].textContent = product.size;
+                specVals[2].textContent = product.year;
+                specVals[3].textContent = product.edition;
 
                 // Update Image
                 const mainImg = document.querySelector('.detail-main-img');
-                mainImg.src = product.image;
-                mainImg.alt = product.title;
+                if (mainImg) {
+                    mainImg.src = product.image;
+                    mainImg.alt = product.title;
+                }
 
-                // Update WhatsApp Logic
+                // Fix WhatsApp Link
                 const waBtn = document.querySelector('.whatsapp-book-btn');
-                waBtn.href = "#"; // Disable direct link
-                waBtn.onclick = (e) => {
-                    e.preventDefault();
-                    const message = `Hi Kalacore Team! I'm interested in booking the '${product.title}' painting. 🎨\n\n*Product Details:*\n- Category: ${product.category}\n- Size: ${product.size}\n- Price: ${product.price}\n\nPlease let me know the next steps for purchase.`;
-                    const encodedMsg = encodeURIComponent(message);
-                    
-                    const url1 = `https://wa.me/918077367055?text=${encodedMsg}`;
-                    const url2 = `https://wa.me/918273918360?text=${encodedMsg}`;
-                    
-                    window.open(url1, '_blank');
-                    setTimeout(() => window.open(url2, '_blank'), 500);
-                };
-                
-                // Update Page Title
+                if (waBtn) {
+                    waBtn.onclick = (e) => {
+                        e.preventDefault();
+                        const message = `Hi Kalacore Team! I'm interested in booking the '${product.title}' painting. 🎨\n\n*Product Details:*\n- Category: ${product.category}\n- Size: ${product.size}\n- Price: ${product.price}\n\nPlease let me know the next steps for purchase.`;
+                        const encodedMsg = encodeURIComponent(message);
+                        const url1 = `https://wa.me/918077367055?text=${encodedMsg}`;
+                        const url2 = `https://wa.me/918273918360?text=${encodedMsg}`;
+                        window.open(url1, '_blank');
+                        setTimeout(() => window.open(url2, '_blank'), 500);
+                    };
+                }
+
+                // Update Title
                 document.title = `${product.title} - Kalacore Fine Art Studio`;
             }
         });
