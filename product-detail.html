@@ -202,6 +202,10 @@
 
                 // Update Title
                 document.title = `${product.title} - Kalacore Fine Art Studio`;
+
+                // Show Container
+                const container = document.querySelector('.product-detail-container');
+                if (container) container.style.opacity = '1';
             }
         });
 
@@ -237,6 +241,11 @@
             });
         });
     </script>
+    <style>
+        .product-detail-container { opacity: 0; transition: opacity 0.4s ease-out; }
+        .detail-main-img { transition: transform 0.6s var(--ease); }
+        .detail-main-img.loading { filter: blur(10px); }
+    </style>
 </head>
 <body class="product-page-body">
 
@@ -274,19 +283,19 @@
                 <!-- Left: Large Image -->
                 <div class="product-visual">
                     <div class="detail-img-wrap">
-                        <img src="kalacore abstract 2.jpg.jpeg" alt="Mor Utsav" class="detail-main-img">
+                        <img src="" alt="" class="detail-main-img">
                     </div>
                 </div>
 
                 <!-- Right: Product Info -->
                 <div class="product-meta-wrap">
-                    <p class="product-cat-label handwritten">Madhubani</p>
-                    <h1 class="product-main-title">Mor Utsav</h1>
-                    <p class="product-artist-tag">by <strong>Aanya Sharma</strong> · 2024</p>
-                    <p class="product-detail-price">₹8,500</p>
+                    <p class="product-cat-label handwritten"></p>
+                    <h1 class="product-main-title"></h1>
+                    <p class="product-artist-tag"></p>
+                    <p class="product-detail-price"></p>
 
                     <div class="product-description">
-                        <p>A vibrant Madhubani composition featuring a regal peacock surrounded by blooming marigolds. Hand-painted with natural pigments following the traditional Mithila style passed down through generations. Each stroke is a celebration of nature and heritage.</p>
+                        <p></p>
                     </div>
 
                     <div class="product-specs-grid">
