@@ -2116,14 +2116,14 @@ a { text-decoration: none; color: inherit; }
     background: url('cursor.svg') no-repeat center center;
     background-size: contain;
     position: fixed;
-    top: 0; left: 0;
+    top: -40px; left: -40px;
     pointer-events: none;
     z-index: 20000;
-    opacity: 0; 
-    transition: opacity 0.3s ease, width 0.3s var(--ease), height 0.3s var(--ease);
+    opacity: 1; 
+    transition: width 0.3s var(--ease), height 0.3s var(--ease), opacity 0.3s;
     will-change: transform;
 }
-.cursor-dot.active { transform: scale(0.9) rotate(5deg); }
+.cursor-dot.active { opacity: 1; transform: scale(0.9) rotate(5deg); }
 .cursor-dot.hovered { transform: scale(1.15) rotate(-5deg); }
 
 .cursor-drop {
