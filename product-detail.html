@@ -10,8 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-    <script src="products-data.js"></script>
-    <script src="main.js?v=1.5" defer></script>
     <script>
         const productsData = {
             "mor-utsav": {
@@ -205,6 +203,38 @@
                 // Update Title
                 document.title = `${product.title} - Kalacore Fine Art Studio`;
             }
+        });
+
+        // ─── CUSTOM CURSOR (INLINE) ───────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursor = document.getElementById('cursorDot');
+            const cursorDrop = document.getElementById('cursorDrop');
+            let mouseX = 0, mouseY = 0;
+            let dropX = 0, dropY = 0;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                if (cursor) {
+                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+                    cursor.classList.add('active');
+                }
+            });
+
+            const tickCursor = () => {
+                dropX += (mouseX - dropX) * 0.15;
+                dropY += (mouseY - dropY) * 0.15;
+                if (cursorDrop) {
+                    cursorDrop.style.transform = `translate(${dropX}px, ${dropY}px)`;
+                }
+                requestAnimationFrame(tickCursor);
+            };
+            requestAnimationFrame(tickCursor);
+
+            document.querySelectorAll('a, button, .product-card').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursor && cursor.classList.remove('hovered'));
+            });
         });
     </script>
 </head>
