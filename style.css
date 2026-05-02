@@ -307,6 +307,22 @@ a { text-decoration: none; color: inherit; }
     width: clamp(180px, 20vw, 290px);
 }
 
+/* Affiliation Stickers */
+.hero-illus--skill {
+    left: 8vw;
+    top: 55%;
+    bottom: auto;
+    width: clamp(120px, 14vw, 180px);
+    transform: rotate(-10deg);
+}
+
+.hero-illus--nsdpi {
+    right: 9vw;
+    top: 22%;
+    width: clamp(120px, 14vw, 180px);
+    transform: rotate(8deg);
+}
+
 /* HERO CENTER CONTENT */
 .hero-center {
     position: relative; z-index: 3;

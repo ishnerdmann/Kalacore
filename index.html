@@ -85,6 +85,14 @@
             <img src="assets/char-right.svg" alt="Character thinking and working">
         </div>
 
+        <!-- Affiliation Stickers -->
+        <div class="hero-illus hero-illus--skill" id="stickerSkill">
+            <img src="skill_india.png" alt="Skill India Logo">
+        </div>
+        <div class="hero-illus hero-illus--nsdpi" id="stickerNsdpi">
+            <img src="logo-nsdpi.png" alt="NSDPI Logo">
+        </div>
+
         <!-- Center content -->
         <div class="hero-center">
 
@@ -901,8 +909,13 @@ function initApp() {
         const cy = (e.clientY / window.innerHeight - 0.5) * 2;
         const illusLeft = document.getElementById('illusLeft');
         const illusRight = document.getElementById('illusRight');
+        const stickerSkill = document.getElementById('stickerSkill');
+        const stickerNsdpi = document.getElementById('stickerNsdpi');
+        
         if (illusLeft) gsap.to(illusLeft, { x: -cx * 15, y: -cy * 10, duration: 0.8 });
         if (illusRight) gsap.to(illusRight, { x: cx * 15, y: -cy * 10, duration: 0.8 });
+        if (stickerSkill) gsap.to(stickerSkill, { x: -cx * 25, y: cy * 15, duration: 1.2 });
+        if (stickerNsdpi) gsap.to(stickerNsdpi, { x: cx * 25, y: cy * 15, duration: 1.2 });
     });
 
     // Mobile Menu
