@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mor Utsav - Kalacore Fine Art Studio</title>
+    <title>Kalacore Fine Art Studio</title>
     <link rel="stylesheet" href="style.css?v=1.3">
     <!-- Libs -->
     <link rel="icon" type="image/svg+xml" href="logo.svg">
@@ -18,7 +18,7 @@
                 year: "2024",
                 price: "₹8,500",
                 category: "Madhubani",
-                image: "/kalacore abstract 2.jpg.jpeg",
+                image: "kalacore abstract 2.jpg.jpeg",
                 description: "A vibrant Madhubani composition featuring a regal peacock surrounded by blooming marigolds. Hand-painted with natural pigments following the traditional Mithila style passed down through generations.",
                 medium: "Natural pigments on handmade paper",
                 size: "16 × 24 inches",
@@ -30,7 +30,7 @@
                 year: "2023",
                 price: "₹6,200",
                 category: "Watercolor",
-                image: "/The silence of nature.jpg.jpeg",
+                image: "The silence of nature.jpg.jpeg",
                 description: "Capturing the ethereal morning light at the ghats of Varanasi. This watercolor piece uses soft bleeds and delicate layers to evoke the spiritual calm of the Ganges at dawn.",
                 medium: "Artist-grade watercolors on 300gsm cold-pressed paper",
                 size: "12 × 18 inches",
@@ -42,7 +42,7 @@
                 year: "2024",
                 price: "₹14,500",
                 category: "Pichwai",
-                image: "/3.jpg",
+                image: "3.jpg",
                 description: "A detailed Pichwai painting depicting Shrinathji amidst the lush groves of Vrindavan. Gold foil accents and stone pigments bring a celestial glow to this traditional masterpiece.",
                 medium: "Stone pigments and gold foil on cotton fabric",
                 size: "24 × 36 inches",
@@ -54,7 +54,7 @@
                 year: "2024",
                 price: "₹15,500",
                 category: "Oil on Canvas",
-                image: "/khat.jpg.jpeg",
+                image: "khat.jpg.jpeg",
                 description: "An expressive oil painting exploring the interplay of light and texture. The 'Golden Horizon' symbolizes hope and the infinite possibilities of the creative mind.",
                 medium: "Oil on stretched canvas",
                 size: "20 × 20 inches (Square)",
@@ -66,7 +66,7 @@
                 year: "2024",
                 price: "₹22,000",
                 category: "Traditional Art",
-                image: "/divine-grace.png",
+                image: "divine-grace.png",
                 description: "A magnificent depiction of celestial grace, inspired by ancient temple murals. Intricate patterns and a rich palette create a sense of timeless devotion.",
                 medium: "Acrylic and mixed media",
                 size: "30 × 40 inches",
@@ -78,7 +78,7 @@
                 year: "2023",
                 price: "₹11,000",
                 category: "Landscape",
-                image: "/1.jpeg",
+                image: "1.jpeg",
                 description: "A serene landscape that captures the quiet conversation between the wind and the trees. Perfect for bringing a touch of nature's peace into a modern living space.",
                 medium: "Oil on canvas",
                 size: "18 × 24 inches",
@@ -90,7 +90,7 @@
                 year: "2024",
                 price: "₹9,500",
                 category: "Portrait",
-                image: "/calm-soul.png",
+                image: "calm-soul.png",
                 description: "A meditative portrait exploring inner peace and silence. The soft, blended tones create a soothing visual experience that resonates with the viewer's own sense of calm.",
                 medium: "Oil on canvas",
                 size: "24 × 24 inches",
@@ -102,7 +102,7 @@
                 year: "2024",
                 price: "₹13,200",
                 category: "Contemporary",
-                image: "/ethereal-beauty.png",
+                image: "ethereal-beauty.png",
                 description: "A stunning contemporary abstract painting that explores fluid, ethereal shapes in shades of deep blue and gold. It represents the beauty found in movement and light.",
                 medium: "Mixed media on canvas",
                 size: "24 × 30 inches",
@@ -114,7 +114,7 @@
                 year: "2023",
                 price: "₹18,900",
                 category: "Acrylic",
-                image: "/2.jpg",
+                image: "2.jpg",
                 description: "A journey into the deep, mysterious heart of an enchanted forest. Vibrant colors and bold strokes create a dynamic and immersive environment.",
                 medium: "Acrylic on canvas",
                 size: "30 × 30 inches",
@@ -126,7 +126,7 @@
                 year: "2024",
                 price: "₹35,000",
                 category: "Classic",
-                image: "/4.HEIC.jpeg",
+                image: "4.HEIC.jpeg",
                 description: "A classic painting celebrating the rich cultural heritage of India. Gold leaf work and traditional motifs make this a truly regal addition to any collection.",
                 medium: "Oil and gold leaf on canvas",
                 size: "36 × 48 inches",
@@ -138,7 +138,7 @@
                 year: "2024",
                 price: "₹7,800",
                 category: "Modern Art",
-                image: "/2.jpg.jpeg",
+                image: "2.jpg.jpeg",
                 description: "An exploration of thoughts and emotions through abstract form. This piece encourages personal interpretation and deep reflection.",
                 medium: "Acrylic and ink on paper",
                 size: "16 × 16 inches",
@@ -150,7 +150,7 @@
                 year: "2024",
                 price: "₹5,500",
                 category: "Folk Art",
-                image: "/3.jpg.jpeg",
+                image: "3.jpg.jpeg",
                 description: "A charming depiction of daily life in an Indian village. Vibrant colors and simple forms capture the joy and community of rural living.",
                 medium: "Gouache on handmade paper",
                 size: "11 × 15 inches",
@@ -181,8 +181,25 @@
 
                 // Update Image
                 const mainImg = document.querySelector('.detail-main-img');
+                const imgWrap = document.querySelector('.detail-img-wrap');
+                
                 if (mainImg) {
-                    mainImg.src = encodeURI(product.image);
+                    // Set loading state
+                    imgWrap.classList.add('loading');
+                    
+                    // Once image is loaded, remove loading state and fade in
+                    mainImg.onload = () => {
+                        imgWrap.classList.remove('loading');
+                        mainImg.classList.add('loaded');
+                    };
+
+                    // Handle errors
+                    mainImg.onerror = () => {
+                        imgWrap.classList.remove('loading');
+                        console.error("Failed to load image:", product.image);
+                    };
+
+                    mainImg.src = encodeURI(product.image.replace(/^\//, ''));
                     mainImg.alt = product.title;
                 }
 
@@ -273,7 +290,7 @@
             <div class="product-detail-grid">
                 <!-- Left: Large Image -->
                 <div class="product-visual">
-                    <div class="detail-img-wrap">
+                    <div class="detail-img-wrap loading">
                         <img src="" alt="" class="detail-main-img">
                     </div>
                 </div>
