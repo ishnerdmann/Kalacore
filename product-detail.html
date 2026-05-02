@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalacore Fine Art Studio</title>
-    <link rel="stylesheet" href="style.css?v=1.8">
+    <link rel="stylesheet" href="style.css?v=1.9">
     <!-- Libs -->
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="main.js?v=1.9" defer></script>
+
     <style>
         /* Inline critical styles to prevent flicker even if CSS is cached */
         .detail-img-wrap.loading {
@@ -411,7 +413,7 @@
 
         // Initialize Product Page
         (function() {
-            console.log("Kalacore Product Detail V1.7 Active");
+            console.log("Kalacore Product Detail V1.9 Active");
             const params = new URLSearchParams(window.location.search);
             const productId = params.get('id');
             const product = productsData[productId] || (productId ? null : productsData['mor-utsav']);
@@ -468,62 +470,5 @@
         })();
     </script>
 
-    <script>
-        // ─── CUSTOM CURSOR ───────────────────────────
-        const cursor = document.getElementById('cursorDot');
-        const cursorDrop = document.getElementById('cursorDrop');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-        let dropX = 0, dropY = 0;
-        let isMoving = false;
-        let moveTimeout;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            if (cursor) {
-                cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-                cursor.classList.add('active');
-            }
-            
-            if (Math.random() > 0.85) {
-                const drop = document.createElement('div');
-                drop.className = 'cursor-splash';
-                drop.style.left = mouseX + 'px';
-                drop.style.top = mouseY + 'px';
-                document.body.appendChild(drop);
-                setTimeout(() => drop.remove(), 600);
-            }
-
-            isMoving = true;
-            clearTimeout(moveTimeout);
-            moveTimeout = setTimeout(() => {
-                isMoving = false;
-                if (cursor) cursor.classList.remove('active');
-            }, 150);
-        });
-
-        const tickCursor = () => {
-            dropX += (mouseX - dropX) * 0.15;
-            dropY += (mouseY - dropY) * 0.15;
-            
-            if (cursorDrop) {
-                cursorDrop.style.transform = `translate(${dropX}px, ${dropY}px)`;
-                const velX = mouseX - dropX;
-                const velY = mouseY - dropY;
-            }
-            requestAnimationFrame(tickCursor);
-        };
-        requestAnimationFrame(tickCursor);
-
-        function refreshCursorHover() {
-            document.querySelectorAll('a, button, .product-card, .text-block, .btn-pill').forEach(el => {
-                el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hovered'));
-                el.addEventListener('mouseleave', () => cursor && cursor.classList.remove('hovered'));
-            });
-        }
-        refreshCursorHover();
-    </script>
 </body>
 </html>
